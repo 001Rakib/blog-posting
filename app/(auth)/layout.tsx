@@ -1,4 +1,4 @@
-import { ClerkProvider, SignInButton, SignedOut } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import "../globals.css";
@@ -16,13 +16,7 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-
-          {children}
-        </body>
+        <body className={`${inter.className} bg-dark-1`}>{children}</body>
       </html>
     </ClerkProvider>
   );
