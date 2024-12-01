@@ -1,35 +1,41 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ReactNode } from "react";
+import { Inter } from "next/font/google";
 import "../globals.css";
+import TopBar from "@/components/shared/TopBar";
+import LeftSidebar from "@/components/shared/LeftSidebar";
+import RIghtSidebar from "@/components/shared/RIghtSidebar";
+import BottomBar from "@/components/shared/BottomBar";
 
-const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Threads",
-  description: "Post your thoughts",
+  description: "A next.js 15 meta threads application",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const inter = Inter({
+  subsets: ["latin"],
+});
+
+const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-dark-1`}>
+          <TopBar />
+
+          <main>
+            <LeftSidebar />
+            <section className="main-container">
+              <div className="w-full max-w-4xl">{children}</div>
+            </section>
+            <RIghtSidebar />
+          </main>
+
+          <BottomBar />
+        </body>
+      </html>
+    </ClerkProvider>
   );
-}
+};
+
+export default layout;

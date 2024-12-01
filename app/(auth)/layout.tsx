@@ -1,10 +1,4 @@
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignInButton, SignedOut } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import "../globals.css";
@@ -26,9 +20,6 @@ const layout = ({ children }: { children: ReactNode }) => {
           <SignedOut>
             <SignInButton />
           </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
 
           {children}
         </body>
